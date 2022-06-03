@@ -5,8 +5,25 @@
 	<title>Insert title here</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script type="text/javascript" src="/js/myScript.js"></script>
+	<script th:inline="javascript">
+	$(function(){
+		$("#btn-b2").click(function(){
+			var info= /*[[${session.loginfo}]]*/null;
+			if(info!=null){
+				//true이면: 게시판페이지 이동
+				location.href="/board2";
+			}else{
+				//권한이 없으면
+				alert("로그인후 이용가능합니다.");
+				location.href="/signin";
+			}
+		});
+	});
+		
+	</script>
 </head>
 <body>
+
 	<header th:fragment="header">
 		<h1>헤더영역</h1>
 		<div>
@@ -18,7 +35,8 @@
 				<a href="#" th:text="${session.loginfo.name}">이름출력</a>
 				<a href="/member/signout">로그아웃</a>
 			</span>
-			<button type="button" id="btn-b">게시판</button>
+			<button type="button" id="btn-b">게시판1</button>
+			<button type="button" id="btn-b2">게시판2</button>
 		</div>
 	</header>
 </body>

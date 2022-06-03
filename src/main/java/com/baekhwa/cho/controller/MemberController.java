@@ -8,7 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.baekhwa.cho.domain.dto.LoginDTO;
 import com.baekhwa.cho.domain.dto.MemberInsertDTO;
 import com.baekhwa.cho.domain.dto.SigninDTO;
 import com.baekhwa.cho.service.MemberService;
@@ -51,5 +53,15 @@ public class MemberController {
 		session.removeAttribute("loginfo");
 		//session.invalidate();//모든세션 삭제
 		return  "redirect:/";
+	}
+	
+	@ResponseBody// boolean 결과 리턴 ajax -> success의 함수의 result로
+	@GetMapping("signin-check")
+	public boolean signinCheck(HttpSession session) {
+		log.debug(">>> 로그인체크");
+		LoginDTO loginfo=(LoginDTO) session.getAttribute("loginfo");
+		log.debug(">>>loginfo : "+loginfo);
+		if(loginfo==null)return false;
+		return true;
 	}
 }
