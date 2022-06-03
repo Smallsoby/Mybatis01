@@ -16,6 +16,7 @@
 				<a href="#" th:text="${session.loginfo.name}">이름출력</a>
 				<a href="/member/signout">로그아웃</a>
 			</span>
+			<a th:if="${session.loginfo}" href="/board">게시판</a>
 		</div>
 	</header>
 </body>

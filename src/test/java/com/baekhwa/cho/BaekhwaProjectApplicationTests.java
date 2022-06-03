@@ -26,7 +26,7 @@ class BaekhwaProjectApplicationTests {
 		System.out.println(r+"개의 회원정보를 삽입하였습니다.");
 	}
 	//
-	@Test
+	//@Test
 	void 비밀번호수정() {
 		MemberUpdateDTO dto=MemberUpdateDTO.builder()
 				.no(2).pass("2222")
@@ -39,5 +39,6 @@ class BaekhwaProjectApplicationTests {
 		
 		mapper.update(dto);
 	}
+	
 
 }

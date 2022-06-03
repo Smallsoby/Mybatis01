@@ -14,6 +14,7 @@ import com.baekhwa.cho.domain.dto.MemberInsertDTO;
 import com.baekhwa.cho.domain.dto.SigninDTO;
 import com.baekhwa.cho.mybatis.mapper.MemberMapper;
 import com.baekhwa.cho.service.MemberService;
+import com.baekhwa.cho.util.EncryptUtils;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,6 +30,9 @@ public class MemberServiceProc implements MemberService {
 		// DB에 dto정보 저장
 		//필요한게 무엇일까요?
 		//DB접근(jpa,my) DAO(repository 객체, mapper객체)은 무엇으로 결정?
+		String encryptedPass=EncryptUtils.encryptSHA256(dto.getPass());
+		System.out.println(dto.getPass()+":"+encryptedPass);
+		dto.setPass(encryptedPass);
 		int result=mapper.save(dto);
 		
 		log.debug(result+"명의 회원가입 정상완료!");
@@ -43,7 +47,7 @@ public class MemberServiceProc implements MemberService {
 			//회원이 존재하면
 			//비밀번호 확인할께요..
 			MemberDTO member=result.get();
-			if(member.getPass().equals( dto.getPass() ) ) {
+			if(member.getPass().equals( EncryptUtils.encryptSHA256(dto.getPass()) ) ) {
 				//비밀번호 일치한 경우
 				//session에 로그인정보 저장하면됩니다.
 				//???? 이름, email
@@ -69,7 +73,7 @@ public class MemberServiceProc implements MemberService {
 		if(result.isPresent()) {
 			//회원이 존재합니다.
 			//패스워드 비교
-			if(result.get().getPass().equals(dto.getPass())) {
+			if(result.get().getPass().equals(EncryptUtils.encryptSHA256(dto.getPass()))) {
 				//비밀번호일치
 				//MemberDTO -> LoginDTO
 				//LoginDTO loginfo=result.map(LoginDTO::new).get();
