@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<head th:fragment="head">
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script type="text/javascript" src="/js/myScript.js"></script>
 </head>
 <body>
 	<header th:fragment="header">
@@ -16,7 +18,7 @@
 				<a href="#" th:text="${session.loginfo.name}">이름출력</a>
 				<a href="/member/signout">로그아웃</a>
 			</span>
-			<a th:if="${session.loginfo}" href="/board">게시판</a>
+			<button type="button" id="btn-b">게시판</button>
 		</div>
 	</header>
 </body>
