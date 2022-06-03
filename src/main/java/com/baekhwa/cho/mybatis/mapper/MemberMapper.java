@@ -26,4 +26,7 @@ public interface MemberMapper {
 	@Select("select * from member where no=#{no}")
 	Optional<MemberDTO> selectById(long no);
 
+	@Select("select * from member where email=#{email}")
+	Optional<MemberDTO> findByEmail(String email);
+
 }

@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -24,6 +25,7 @@ public class MemberController {
 	@Autowired//
 	private  MemberService service;
 
+	//회원가입처리
 	@PostMapping("signup")
 	public String signup(MemberInsertDTO dto) {
 		log.debug(">>> 회원가입처리 : "+ dto);
@@ -36,9 +38,18 @@ public class MemberController {
 		return "redirect:/signin";
 	}
 	
-	@PostMapping("signin")
+	//로그인처리
+	@PostMapping("signin") //파라미터 매핑을 위해 DTO객체에 setter 생성
 	public String signin(SigninDTO dto,HttpSession session, Model model) {
-		return  "";//성공시(인덱스), 실패시(로그인)
+		log.debug(">>> 로그인처리 : "+ dto);
+		return  service.signin2(dto, session, model);//성공시(인덱스), 실패시(로그인)
 		//머가필요해요?
+	}
+	@GetMapping("signout") //파라미터 매핑을 위해 DTO객체에 setter 생성
+	public String signout(HttpSession session) {
+		log.debug(">>> 로그아웃 처리");
+		session.removeAttribute("loginfo");
+		//session.invalidate();//모든세션 삭제
+		return  "redirect:/";
 	}
 }
