@@ -6,9 +6,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.baekhwa.cho.domain.dto.BoardDTO;
 import com.baekhwa.cho.domain.dto.MemberDTO;
 import com.baekhwa.cho.domain.dto.MemberInsertDTO;
 import com.baekhwa.cho.domain.dto.MemberUpdateDTO;
+import com.baekhwa.cho.mybatis.mapper.BoardMapper;
 import com.baekhwa.cho.mybatis.mapper.MemberMapper;
 
 @SpringBootTest
@@ -16,6 +18,11 @@ class BaekhwaProjectApplicationTests {
 
 	@Autowired
 	MemberMapper mapper;
+	
+	@Autowired
+	BoardMapper boardMapper;
+	
+	///////////////////////////
 	
 	//@Test
 	void 멤버삽입테스트() {
@@ -39,6 +46,9 @@ class BaekhwaProjectApplicationTests {
 		
 		mapper.update(dto);
 	}
+	
+	////////////////////////////////////////////////////////
+	
 	
 
 }

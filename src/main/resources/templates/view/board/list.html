@@ -8,6 +8,7 @@
 	<main>
 		<h1>게시판입니다.</h1>
 		<div>
+			<p><a href="/board/write">글쓰기</a></p>
 			<table>
 				<thead>
 					<tr>
@@ -22,7 +23,7 @@
 					<tr th:each="dto : ${list}">
 						<td>[[${dto.no}]]</td>
 						<td>
-							<a href="#">[[${dto.title}]]</a>
+							<a th:href="|/board/${dto.no}|">[[${dto.title}]]</a>
 						</td>
 						<td>[[${dto.readCount}]]</td>
 						<td>[[${dto.writer}]]</td>

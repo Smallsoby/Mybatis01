@@ -1,6 +1,7 @@
 package com.baekhwa.cho.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,10 +9,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.baekhwa.cho.domain.dto.BoardDTO;
+import com.baekhwa.cho.domain.dto.BoardInsertDTO;
 import com.baekhwa.cho.domain.dto.BoardListDTO;
+import com.baekhwa.cho.domain.dto.BoardUpdateDTO;
 import com.baekhwa.cho.mybatis.mapper.BoardMapper;
 import com.baekhwa.cho.service.BoardService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class BoardServiceProc implements BoardService {
 	
@@ -30,5 +36,29 @@ public class BoardServiceProc implements BoardService {
 		model.addAttribute("list", result);
 		
 	}
+
+	@Override
+	public void save(BoardInsertDTO dto) {
+		// DB save : who? : dao
+		int n=mapper.save(dto);
+		//n db에서 변경된데이터 정보 리턴
+	}
+
+	//상세정보 불러와서 모델에 담기
+	@Override
+	public void detail(int no, Model model) {
+		BoardDTO result=mapper.findById(no).orElseThrow();
+		model.addAttribute("detail", result);
+	}
+
+	@Override
+	public void update(BoardUpdateDTO dto) {
+		int n=mapper.update(dto);
+		log.debug(n+"개의 데이터 수정완료!");
+		
+	}
+	
+
+	
 
 }

@@ -17,7 +17,7 @@ public class BoardListDTO {
 	private String title;
 	private String writer;
 	private int readCount;
-	private LocalDateTime createdDate;
+	private LocalDateTime createdDate;//created_date
 	private LocalDateTime updatedDate;
 	
 	public BoardListDTO(BoardDTO dto) {

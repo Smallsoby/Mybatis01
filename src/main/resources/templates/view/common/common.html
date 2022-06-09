@@ -27,6 +27,7 @@
 	<header th:fragment="header">
 		<h1>헤더영역</h1>
 		<div>
+			<a href="/">HOME</a>
 			<a href="/signup">회원가입</a>
 			<span th:unless="${session.loginfo}">
 				<a href="/signin">로그인</a>
@@ -35,7 +36,7 @@
 				<a href="#" th:text="${session.loginfo.name}">이름출력</a>
 				<a href="/member/signout">로그아웃</a>
 			</span>
-			<button type="button" id="btn-b">게시판1</button>
+			<button type="button" id="btn-b">마이바티스-게시판</button>
 			<button type="button" id="btn-b2">게시판2</button>
 		</div>
 	</header>
