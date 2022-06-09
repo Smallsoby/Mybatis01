@@ -15,4 +15,6 @@ public interface BoardService {
 
 	void update(BoardUpdateDTO dto);
 
+	void delete(int no);
+
 }

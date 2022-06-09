@@ -22,6 +22,10 @@
 		<div>
 			<table id="detail-view">
 				<tr>
+					<td>글번호</td>
+					<td id="no">[[${detail.no}]]</td>
+				</tr>
+				<tr>
 					<td>제목</td>
 					<td th:text="${detail.title}">제목이 들어갈꺼에요</td>
 				</tr>
@@ -47,11 +51,29 @@
 					<td colspan="2">
 						<a href="/board">LIST VIEW</a>
 						<button type="button" id="btn-edit">detail edit</button>
+						<button type="button" id="btn-del">detail delete</button>
 					</td>
 				</tr>
 			</table>
 			<script type="text/javascript">
 				$(function(){
+					$("#btn-del").click(function(){
+						var result=confirm("do you want delete?");
+						/* 확인:true 취소:false */
+						if(!result)return;
+						var no=$("#no").text();
+						$.ajax({
+							url:"/board/"+no.trim(),
+							type:"post",
+							data:{"_method":"delete"},
+							success:function(){
+								location.href="/board";
+							}
+							
+						});
+						
+					});
+					
 					$("#btn-edit").click(function(){
 						$("#detail-view").hide();
 						$("#edit-form").show();

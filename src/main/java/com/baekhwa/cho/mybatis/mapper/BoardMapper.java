@@ -3,6 +3,7 @@ package com.baekhwa.cho.mybatis.mapper;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -29,5 +30,8 @@ public interface BoardMapper {
 			+ "set title=#{title}, content=#{content} "
 			+ "where no=#{no}")
 	int update(BoardUpdateDTO dto);
+
+	@Delete("delete from mybatis_board where no=#{no}")
+	int deleteById(int no);
 
 }

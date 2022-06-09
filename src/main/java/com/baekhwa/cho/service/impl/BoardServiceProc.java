@@ -57,6 +57,12 @@ public class BoardServiceProc implements BoardService {
 		log.debug(n+"개의 데이터 수정완료!");
 		
 	}
+
+	@Override
+	public void delete(int no) {
+		int n=mapper.deleteById(no);
+		log.debug(n+"개의 데이터 삭제완료!");
+	}
 	
 
 	

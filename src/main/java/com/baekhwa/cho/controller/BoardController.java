@@ -5,9 +5,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.filter.HiddenHttpMethodFilter;
 
 import com.baekhwa.cho.domain.dto.BoardInsertDTO;
 import com.baekhwa.cho.domain.dto.BoardUpdateDTO;
@@ -63,7 +66,7 @@ public class BoardController {
 		//???page + detail-data
 		return "view/board/detail";
 	}
-
+	//PutMapping 으로 조정할꼐요
 	@PostMapping("/board/{no}")
 	public String update(/* @PathVariable int no, */BoardUpdateDTO dto) {
 		
@@ -71,6 +74,16 @@ public class BoardController {
 		//System.out.println(dto);
 		
 		return "redirect:/board/"+dto.getNo(); // get "/board/{no}"
+	}
+	
+	//spring.mvc.hiddenmethod.filter.enabled=true
+	//properties에서 설정해야 사용가능합니다..
+	@ResponseBody
+	@DeleteMapping("/board/{no}")
+	public void delete(@PathVariable int no) {
+		//System.out.println("delete__no:: "+no);
+		
+		service.delete(no);
 	}
 }
 
