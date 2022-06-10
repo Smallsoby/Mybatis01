@@ -55,15 +55,16 @@
 					</td>
 				</tr>
 			</table>
-			<script type="text/javascript">
+			<script th:inline="javascript">
 				$(function(){
 					$("#btn-del").click(function(){
 						var result=confirm("do you want delete?");
 						/* 확인:true 취소:false */
 						if(!result)return;
-						var no=$("#no").text();
+						var no="[[${detail.no}]]";
+						//alert(no);
 						$.ajax({
-							url:"/board/"+no.trim(),
+							url:"/board/"+no,
 							type:"post",
 							data:{"_method":"delete"},
 							success:function(){
@@ -115,6 +116,7 @@
 					<tr>
 						<td colspan="2">
 							<a href="/board">LIST VIEW</a>
+							<input type="hidden" name="_method" value="PUT">
 							<button type="submit">수정완료</button>
 							<button type="button" id=btn-cancel>취소</button>
 						</td>

@@ -6,11 +6,14 @@ import java.util.Optional;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.session.RowBounds;
 
 import com.baekhwa.cho.domain.dto.BoardDTO;
 import com.baekhwa.cho.domain.dto.BoardInsertDTO;
+import com.baekhwa.cho.domain.dto.BoardListDTO;
 import com.baekhwa.cho.domain.dto.BoardUpdateDTO;
 
 @Mapper
@@ -33,5 +36,11 @@ public interface BoardMapper {
 
 	@Delete("delete from mybatis_board where no=#{no}")
 	int deleteById(int no);
+
+	@Select("select * from mybatis_board where no>0 order by no desc "
+			+ "limit #{offset} , #{limit}")
+	List<BoardListDTO> select(@Param("offset") int offset,@Param("limit") int limit);
+
+
 
 }

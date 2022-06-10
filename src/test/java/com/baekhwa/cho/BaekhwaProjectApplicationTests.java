@@ -1,12 +1,14 @@
 package com.baekhwa.cho;
 
 import java.util.Optional;
+import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.baekhwa.cho.domain.dto.BoardDTO;
+import com.baekhwa.cho.domain.dto.BoardInsertDTO;
 import com.baekhwa.cho.domain.dto.MemberDTO;
 import com.baekhwa.cho.domain.dto.MemberInsertDTO;
 import com.baekhwa.cho.domain.dto.MemberUpdateDTO;
@@ -21,6 +23,15 @@ class BaekhwaProjectApplicationTests {
 	
 	@Autowired
 	BoardMapper boardMapper;
+	
+	//@Test
+	void 더미데이터() {
+		IntStream.rangeClosed(1, 200).forEach(i->{
+			boardMapper.save(BoardInsertDTO.builder()
+					.title("제목"+i).content("내용"+i).writer("test01@test.com")
+					.build());
+		});
+	}
 	
 	///////////////////////////
 	

@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.apache.ibatis.session.RowBounds;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -24,6 +27,15 @@ public class BoardServiceProc implements BoardService {
 	//dao ???
 	@Autowired
 	private BoardMapper mapper;
+	
+	//페이징 처리해서 리스트 갖고오기
+	@Override
+	public void boardList(int pageNo, Model model) {
+		int limit=5;
+		int offset=limit * (pageNo-1);//현실의 1번페이지는 offset의 0
+		List<BoardListDTO> result=mapper.select(offset,limit);
+		model.addAttribute("list", result);
+	}
 	
 	@Override
 	public void boardListAll(Model model) {
@@ -63,6 +75,8 @@ public class BoardServiceProc implements BoardService {
 		int n=mapper.deleteById(no);
 		log.debug(n+"개의 데이터 삭제완료!");
 	}
+
+	
 	
 
 	

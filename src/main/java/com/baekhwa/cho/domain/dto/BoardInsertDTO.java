@@ -1,10 +1,15 @@
 package com.baekhwa.cho.domain.dto;
 
-import lombok.Setter;
-import lombok.ToString;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@ToString
-@Setter// 컨트롤러에 파라미터 매핑을 위해서
+
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class BoardInsertDTO {
 	
 	private String title;

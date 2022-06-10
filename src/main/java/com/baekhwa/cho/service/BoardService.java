@@ -17,4 +17,8 @@ public interface BoardService {
 
 	void delete(int no);
 
+	//void boardList(Model model);
+
+	void boardList(int pageNo, Model model);
+
 }

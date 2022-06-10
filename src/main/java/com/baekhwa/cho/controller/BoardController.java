@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 
@@ -29,11 +32,12 @@ public class BoardController {
 	
 	//데이터베이스 정보 읽어와서 리스트페이지 이동
 	@GetMapping("/board")
-	public String list(Model model) {
+	public String list(@RequestParam(defaultValue = "1") int pageNo, Model model) {
 		//db에서 데이터 읽어올꼐요...
 		//페이지에 전달
-		
-		service.boardListAll(model);		
+		//System.out.println(pageNo);//0, null, other
+		//service.boardListAll(model);
+		service.boardList(pageNo, model);
 		return "view/board/list";
 	}
 	//write page move
@@ -67,7 +71,7 @@ public class BoardController {
 		return "view/board/detail";
 	}
 	//PutMapping 으로 조정할꼐요
-	@PostMapping("/board/{no}")
+	@PutMapping("/board/{no}")//method=post, _method : PUT
 	public String update(/* @PathVariable int no, */BoardUpdateDTO dto) {
 		
 		service.update(dto);
@@ -79,7 +83,7 @@ public class BoardController {
 	//spring.mvc.hiddenmethod.filter.enabled=true
 	//properties에서 설정해야 사용가능합니다..
 	@ResponseBody
-	@DeleteMapping("/board/{no}")
+	@DeleteMapping("/board/{no}") //method=post, _method : DELETE
 	public void delete(@PathVariable int no) {
 		//System.out.println("delete__no:: "+no);
 		
