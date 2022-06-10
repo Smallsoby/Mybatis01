@@ -31,6 +31,18 @@
 					</tr>
 				</tbody>
 			</table>
+			<div>
+				<a th:if="${pi.start gt 1}" th:href="@{/board(pageNo=${pi.start-1})}"> 
+					<button type="button">&lt;</button>
+				</a>
+				<a th:each="pno : ${#numbers.sequence(pi.start,pi.end)}" th:href="@{/board(pageNo=${pno})}">
+					<button type="button">[[${pno}]]</button>
+				</a>
+				<a th:if="${pi.end lt pi.total}" th:href="@{/board(pageNo=${pi.end+1})}"> 
+					<button type="button">&gt;</button>
+				</a>
+				
+			</div>
 		</div>
 	</main>
 </body>

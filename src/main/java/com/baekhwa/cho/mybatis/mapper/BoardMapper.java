@@ -41,6 +41,9 @@ public interface BoardMapper {
 			+ "limit #{offset} , #{limit}")
 	List<BoardListDTO> select(@Param("offset") int offset,@Param("limit") int limit);
 
+	@Select("select count(*) from mybatis_board")
+	int selectCount();
+
 
 
 }

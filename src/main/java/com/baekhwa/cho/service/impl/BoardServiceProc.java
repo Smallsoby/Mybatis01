@@ -17,6 +17,7 @@ import com.baekhwa.cho.domain.dto.BoardListDTO;
 import com.baekhwa.cho.domain.dto.BoardUpdateDTO;
 import com.baekhwa.cho.mybatis.mapper.BoardMapper;
 import com.baekhwa.cho.service.BoardService;
+import com.baekhwa.cho.util.PageInfo;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,10 +32,15 @@ public class BoardServiceProc implements BoardService {
 	//페이징 처리해서 리스트 갖고오기
 	@Override
 	public void boardList(int pageNo, Model model) {
-		int limit=5;
+		int limit=10;
 		int offset=limit * (pageNo-1);//현실의 1번페이지는 offset의 0
 		List<BoardListDTO> result=mapper.select(offset,limit);
+		int rowTotal=mapper.selectCount();
+
+		//System.out.println("rowTotal: "+rowTotal);
 		model.addAttribute("list", result);
+		model.addAttribute("pi", PageInfo.getInstance(pageNo, rowTotal, limit));
+		
 	}
 	
 	@Override

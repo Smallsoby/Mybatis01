@@ -31,7 +31,7 @@ public class BoardController {
 	private BoardService service;
 	
 	//데이터베이스 정보 읽어와서 리스트페이지 이동
-	@GetMapping("/board")
+	@GetMapping("/board") //파라미터변수가 없으면 pageNo가 오류발생하므로 defaultValue 적용
 	public String list(@RequestParam(defaultValue = "1") int pageNo, Model model) {
 		//db에서 데이터 읽어올꼐요...
 		//페이지에 전달
