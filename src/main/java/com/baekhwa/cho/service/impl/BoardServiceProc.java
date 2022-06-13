@@ -66,6 +66,8 @@ public class BoardServiceProc implements BoardService {
 	@Override
 	public void detail(int no, Model model) {
 		BoardDTO result=mapper.findById(no).orElseThrow();
+		//조회수 update
+		mapper.updateReadCount(no);
 		model.addAttribute("detail", result);
 	}
 

@@ -44,6 +44,11 @@ public interface BoardMapper {
 	@Select("select count(*) from mybatis_board")
 	int selectCount();
 
+	@Update("update mybatis_board "
+			+ "set read_count=read_count+1 "
+			+ "where no=#{no}")
+	void updateReadCount(int no);
+
 
 
 }
